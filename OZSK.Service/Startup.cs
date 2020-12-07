@@ -1,3 +1,4 @@
+using System;
 using Autofac;
 using Autofac.Configuration;
 using AutoMapper;
@@ -66,6 +67,8 @@ namespace OZSK.Service
             services.AddControllers();
             services.AddHealthChecks();
             services.AddDataBaseSetting(Configuration);
+            services.AddAutoMapper((Action<IServiceProvider, IMapperConfigurationExpression>) null,
+                AppDomain.CurrentDomain.GetAssemblies());
 
         }
 

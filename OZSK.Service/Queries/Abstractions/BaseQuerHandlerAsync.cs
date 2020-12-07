@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using OZSK.Service.DataBase;
 
 namespace OZSK.Service.Queries.Abstractions
@@ -10,9 +11,11 @@ namespace OZSK.Service.Queries.Abstractions
     public abstract class BaseQuerHandler<TQuery, TResult> : IQueryHandlerAsync<TQuery, TResult> where TQuery : IQuery<TResult>
     {
         protected readonly IConnectionFactory ConnectionFactory;
-        protected BaseQuerHandler(IConnectionFactory connectionFactory)
+        protected readonly IMapper Mapper;
+        protected BaseQuerHandler(IConnectionFactory connectionFactory, IMapper mapper)
         {
             ConnectionFactory = connectionFactory;
+            Mapper = mapper;
         }
         public abstract Task<TResult> HandleAsync(TQuery query, CancellationToken cancellationToken);
     }

@@ -15,6 +15,10 @@ namespace OZSK.Service.Configuration
             builder.RegisterAssemblyTypes(Assembly.GetEntryAssembly())
                 .Where(q => q.Name.EndsWith("QueryHandler") || q.Name.EndsWith("QueryHandlerAsync"))
                 .AsImplementedInterfaces().AsSelf().SingleInstance();
+
+            builder.RegisterAssemblyTypes(Assembly.GetEntryAssembly())
+                .Where(q => q.Name.EndsWith("CommandHandler") || q.Name.EndsWith("CommandHandlerAsync"))
+                .AsImplementedInterfaces().AsSelf().SingleInstance();
         }
 
 
