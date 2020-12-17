@@ -16,13 +16,10 @@ namespace OZSK.Service.Commands.Carrier
 {
     public class CreateOrUpdateCarrierCommandHandler : BaseSaveCommandHandler<CreateOrUpdateCarrierCommand>
     {
-        private CreateOrUpdateAutoCommandHandler _createOrUpdateAutoCommandHandler;
 
-        public CreateOrUpdateCarrierCommandHandler(IMapper mapper, IConnectionFactory connectionFactory,
-            CreateOrUpdateAutoCommandHandler createOrUpdateAutoCommandHandler) : base(mapper,
+        public CreateOrUpdateCarrierCommandHandler(IMapper mapper, IConnectionFactory connectionFactory) : base(mapper,
             connectionFactory)
         {
-            _createOrUpdateAutoCommandHandler = createOrUpdateAutoCommandHandler;
         }
 
         public override async Task HandleAsync(CreateOrUpdateCarrierCommand command,
@@ -45,17 +42,6 @@ namespace OZSK.Service.Commands.Carrier
                     case EntityState.Deleted:
                         await DeleteCarrier(context, entity, cancellationToken);
                         break;
-                }
-
-                if (command.Carrier.Autos?.Any() ?? false)
-                {
-                    foreach (var one in command.Carrier.Autos)
-                    {
-                        await _createOrUpdateAutoCommandHandler.HandleAsync(new CreateOrUpdateAutoCommand
-                        {
-                            Auto = one
-                        }, cancellationToken);
-                    }
                 }
 
                 await tran.CommitAsync(cancellationToken);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OZSK.Service.Commands.Auto;
 using OZSK.Service.Model;
 using OZSK.Service.Queries.Auto;
 using OZSK.Service.Queries.Carrier;
@@ -23,6 +24,19 @@ namespace OZSK.Service.Controllers
             return await queryHandler.HandleAsync(new GetAutoByCarrierIdQuery()
             {
                 CarrierId = carrierId
+            }, cancellationToken);
+        }
+
+        [HttpPost]
+        [Route("CreateOrUpdate")]
+        public async Task CreateOrUpdateCarrier(
+            [FromServices] CreateOrUpdateAutoCommandHandler commandHandler,
+            DTOAuto auto,
+            CancellationToken cancellationToken)
+        {
+            await commandHandler.HandleAsync(new CreateOrUpdateAutoCommand
+            {
+                Auto = auto
             }, cancellationToken);
         }
     }

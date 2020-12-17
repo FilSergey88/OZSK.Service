@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using OZSK.Service.Commands.Abstractions;
 using OZSK.Service.DataBase;
 using OZSK.Service.EF;
-using OZSK.Service.Model.Abstractions;
+using EntityState = OZSK.Service.Model.Abstractions.EntityState;
 
 namespace OZSK.Service.Commands.Auto
 {
@@ -27,6 +28,7 @@ namespace OZSK.Service.Commands.Auto
             await using var tran = await context.Database.BeginTransactionAsync(cancellationToken);
             try
             {
+                await Validate(command, context, cancellationToken);
                 switch (command.Auto.EntityState)
                 {
                     case EntityState.Added:
@@ -65,6 +67,13 @@ namespace OZSK.Service.Commands.Auto
         {
             context.Update(newAuto);
             await context.SaveChangesAsync(cancellationToken);
+        }
+
+        private async Task Validate(CreateOrUpdateAutoCommand command, Context context, CancellationToken cancellationToken)
+        {
+            var carrier = await context.Carriers.FirstOrDefaultAsync(q => q.Id == command.Auto.CarrierId, cancellationToken);
+            if(carrier == null)
+                throw  new Exception("Такого грузоперевозчика нет");
         }
     }
 }

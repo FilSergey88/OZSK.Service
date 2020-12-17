@@ -12,6 +12,7 @@ namespace OZSK.Service.Model
 
         public int AutoId { get; set; }
         public string Name { get; set; }
+        public string Number { get; set; }
         public Auto Auto{ get; set; }
         public byte[] Ts { get; set; }
     }
