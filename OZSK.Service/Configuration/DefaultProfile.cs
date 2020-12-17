@@ -23,6 +23,8 @@ namespace OZSK.Service.Configuration
 
             CreateMap<Driver, DTODriver>(MemberList.None);
             CreateMap<Consignee, DTOConsignee>(MemberList.None);
+            CreateMap<Auto, DTOAuto>(MemberList.None)
+                .ForMember(q => q.Drivers, c => c.Ignore());
         }
     }
 }

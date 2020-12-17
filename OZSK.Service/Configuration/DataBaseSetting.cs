@@ -14,8 +14,7 @@ namespace OZSK.Service.Configuration
         {
             var connectionstring = new SqlConnectionStringBuilder
             {
-                // InitialCatalog = Environment.GetEnvironmentVariable("DBName"),
-                // DataSource = Environment.GetEnvironmentVariable("DBServer"),
+                
                 InitialCatalog = Environment.GetEnvironmentVariable("DBName") ??
                                  configuration.GetValue<string>("DBName"),
                 DataSource = Environment.GetEnvironmentVariable("DBServer") ??
