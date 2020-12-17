@@ -8,11 +8,11 @@ using OZSK.Service.DataBase;
 
 namespace OZSK.Service.Queries.Abstractions
 {
-    public abstract class BaseQuerHandler<TQuery, TResult> : IQueryHandlerAsync<TQuery, TResult> where TQuery : IQuery<TResult>
+    public abstract class BaseQueryHandler<TQuery, TResult> : IQueryHandlerAsync<TQuery, TResult> where TQuery : IQuery<TResult>
     {
         protected readonly IConnectionFactory ConnectionFactory;
         protected readonly IMapper Mapper;
-        protected BaseQuerHandler(IConnectionFactory connectionFactory, IMapper mapper)
+        protected BaseQueryHandler(IConnectionFactory connectionFactory, IMapper mapper)
         {
             ConnectionFactory = connectionFactory;
             Mapper = mapper;

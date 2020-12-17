@@ -35,17 +35,24 @@ namespace OZSK.Service.EF
                 .HasMany(q => q.Autos)
                 .WithOne(q => q.Carrier)
                 .HasForeignKey(q => q.CarrierId);
+            
             modelBuilder.Entity<Carrier>().Property(q => q.Ts).IsRowVersion();
 
 
             modelBuilder.Entity<Cipherlist>().ToTable("Cipherlist", "dbo");
             modelBuilder.Entity<Cipherlist>().Property(q => q.Ts).IsRowVersion();
+            modelBuilder.Entity<Cipherlist>();
+
             modelBuilder.Entity<Driver>().ToTable("Driver", "dbo");
             modelBuilder.Entity<Driver>().Property(q => q.Ts).IsRowVersion();
             modelBuilder.Entity<ShippingName>().ToTable("ShippingName", "dbo");
             modelBuilder.Entity<ShippingName>().Property(q => q.Ts).IsRowVersion();
             modelBuilder.Entity<Consignee>().ToTable("Consignee", "dbo");
             modelBuilder.Entity<Consignee>().Property(q => q.Ts).IsRowVersion();
+            modelBuilder.Entity<Consignee>()
+                .HasMany(q => q.Cipherlists)
+                .WithOne(q => q.Consignee)
+                .HasForeignKey(q => q.ConsigneeId);
 
         }
     }

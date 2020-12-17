@@ -12,7 +12,7 @@ using OZSK.Service.Queries.Abstractions;
 
 namespace OZSK.Service.Queries.Carrier
 {
-    public class GetCarrierByIdQueryHandler : BaseQuerHandler<GetCarrierByIdQuery, DTOCarrier>
+    public class GetCarrierByIdQueryHandler : BaseQueryHandler<GetCarrierByIdQuery, DTOCarrier>
     {
         public GetCarrierByIdQueryHandler(IConnectionFactory connectionFactory, IMapper mapper) : base(connectionFactory, mapper)
         {

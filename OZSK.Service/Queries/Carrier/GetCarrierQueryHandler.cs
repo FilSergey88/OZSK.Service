@@ -13,7 +13,7 @@ using OZSK.Service.Model;
 namespace OZSK.Service.Queries
 {
     public class
-        GetCarrierQueryHandler : BaseQuerHandler<EmptyQuery<IEnumerable<Model.Carrier>>, IEnumerable<Model.Carrier>>
+        GetCarrierQueryHandler : BaseQueryHandler<EmptyQuery<IEnumerable<Model.Carrier>>, IEnumerable<Model.Carrier>>
     {
         public GetCarrierQueryHandler(IConnectionFactory connectionFactory, IMapper mapper) : base(connectionFactory,
             mapper)
