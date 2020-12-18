@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OZSK.Service.Commands.Auto;
 using OZSK.Service.Model;
+using OZSK.Service.Queries.Abstractions;
 using OZSK.Service.Queries.Auto;
 using OZSK.Service.Queries.Carrier;
 
@@ -15,6 +16,13 @@ namespace OZSK.Service.Controllers
     [ApiController]
     public class AutoController  :ControllerBase
     {
+        [HttpGet]
+        public async Task<IEnumerable<Auto>> GetCarrier([FromServices] GetAutoQueryHandler queryHandler,
+            CancellationToken cancellationToken)
+        {
+            return await queryHandler.HandleAsync(new EmptyQuery<IEnumerable<Auto>>(), cancellationToken);
+        }
+
         [HttpGet]
         [Route("ByCarrierId/{carrierId}")]
         public async Task<IEnumerable<DTOAuto>> GetCarrierById([FromServices] GetAutoByCarrierIdQueryHandler queryHandler,
