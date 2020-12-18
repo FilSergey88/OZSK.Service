@@ -25,6 +25,10 @@ namespace OZSK.Service.Configuration
             CreateMap<Consignee, DTOConsignee>(MemberList.None);
             CreateMap<Auto, DTOAuto>(MemberList.None)
                 .ForMember(q => q.Drivers, c => c.Ignore());
+            CreateMap<Cipherlist, DTOCipherList>(MemberList.None)
+                .ForMember(q => q.Consignee, c => c.MapFrom(s=>s.Consignee));
+
+
         }
     }
 }
