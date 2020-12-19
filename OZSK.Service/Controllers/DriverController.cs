@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using OZSK.Service.Commands.Auto;
 using OZSK.Service.Commands.Driver;
 using OZSK.Service.Model;
+using OZSK.Service.Queries.Abstractions;
 using OZSK.Service.Queries.Driver;
 
 namespace OZSK.Service.Controllers
@@ -15,6 +16,13 @@ namespace OZSK.Service.Controllers
     [ApiController]
     public class DriverController : ControllerBase
     {
+
+        [HttpGet]
+        public async Task<IEnumerable<Driver>> GetCarrier([FromServices] GetDriverQueryHandler queryHandler,
+            CancellationToken cancellationToken)
+        {
+            return await queryHandler.HandleAsync(new EmptyQuery<IEnumerable<Driver>>(), cancellationToken);
+        }
         [HttpGet]
         [Route("ByAutoId/{autoId}")]
         public async Task<IEnumerable<DTODriver>> GetCarrierById([FromServices] GetDriverByAutoIdQueryHandler queryHandler,

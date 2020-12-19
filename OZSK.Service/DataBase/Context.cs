@@ -45,6 +45,10 @@ namespace OZSK.Service.EF
 
             modelBuilder.Entity<Driver>().ToTable("Driver", "dbo");
             modelBuilder.Entity<Driver>().Property(q => q.Ts).IsRowVersion();
+            modelBuilder.Entity<Driver>()
+                .HasOne(q => q.Auto)
+                .WithMany(q => q.Drivers)
+                .HasForeignKey(q => q.AutoId);
             modelBuilder.Entity<ShippingName>().ToTable("ShippingName", "dbo");
             modelBuilder.Entity<ShippingName>().Property(q => q.Ts).IsRowVersion();
             modelBuilder.Entity<Consignee>().ToTable("Consignee", "dbo");

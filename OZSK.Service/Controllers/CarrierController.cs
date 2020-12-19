@@ -17,10 +17,10 @@ namespace OZSK.Service.Controllers
     public class CarrierController : ControllerBase
     {
         [HttpGet]
-        public async Task<IEnumerable<Carrier>> GetCarrier([FromServices] GetCarrierQueryHandler queryHandler,
+        public async Task<IEnumerable<DTOCarrier>> GetCarrier([FromServices] GetCarrierQueryHandler queryHandler,
             CancellationToken cancellationToken)
         {
-            return await queryHandler.HandleAsync(new EmptyQuery<IEnumerable<Carrier>>(), cancellationToken);
+            return await queryHandler.HandleAsync(new EmptyQuery<IEnumerable<DTOCarrier>>(), cancellationToken);
         }
 
         [HttpGet]
