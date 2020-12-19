@@ -35,6 +35,7 @@ namespace OZSK.Service.Queries
                     Contact = q.Contact,
                     EntityState = EntityState.None,
                     Name = q.Name,
+                    INN = q.INN,
                     SEO = q.SEO,
                     Ts = q.Ts,
                     Autos = q.Autos.Select(p => new DTOAuto

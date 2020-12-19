@@ -13,6 +13,7 @@ namespace OZSK.Service.Model
         public string Contact { get; set; }
         public string SEO { get; set; }
         public string Address { get; set; }
+        public string INN { get; set; }
         public IEnumerable<DTOAuto> Autos { get; set; }
         public EntityState EntityState { get; set; }
         public byte[] Ts { get; set; }

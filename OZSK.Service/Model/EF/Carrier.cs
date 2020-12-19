@@ -13,6 +13,7 @@ namespace OZSK.Service.Model
         public string Contact { get; set; }
         public string SEO { get; set; }
         public string Address { get; set; }
+        public string INN { get; set; }
         public virtual ICollection<Auto> Autos{ get; set; }
         public byte[] Ts { get; set; }
     }
