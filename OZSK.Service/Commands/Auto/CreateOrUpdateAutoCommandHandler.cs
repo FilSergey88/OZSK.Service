@@ -44,7 +44,7 @@ namespace OZSK.Service.Commands.Auto
 
                 await tran.CommitAsync(cancellationToken);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 await tran.RollbackAsync(cancellationToken);
                 throw;
