@@ -22,19 +22,6 @@ namespace OZSK.Service.Controllers
         {
             return await queryHandler.HandleAsync(new EmptyQuery<IEnumerable<Auto>>(), cancellationToken);
         }
-
-        [HttpGet]
-        [Route("ByCarrierId/{carrierId}")]
-        public async Task<IEnumerable<DTOAuto>> GetCarrierById([FromServices] GetAutoByCarrierIdQueryHandler queryHandler,
-            [FromRoute] int carrierId,
-            CancellationToken cancellationToken)
-        {
-            return await queryHandler.HandleAsync(new GetAutoByCarrierIdQuery()
-            {
-                CarrierId = carrierId
-            }, cancellationToken);
-        }
-
         [HttpPost]
         [Route("CreateOrUpdate")]
         public async Task CreateOrUpdateCarrier(

@@ -53,6 +53,8 @@ namespace OZSK.Service.Commands.Auto
 
         private async Task DeleteAuto(Context context, Model.Auto entity, CancellationToken cancellationToken)
         {
+            var driver = context.Drivers.Where(q => q.AutoId == entity.Id);
+            context.RemoveRange(driver);
             context.Autos.Remove(entity);
             await context.SaveChangesAsync(cancellationToken);
         }
@@ -69,11 +71,13 @@ namespace OZSK.Service.Commands.Auto
             await context.SaveChangesAsync(cancellationToken);
         }
 
-        private async Task Validate(CreateOrUpdateAutoCommand command, Context context, CancellationToken cancellationToken)
+        private async Task Validate(CreateOrUpdateAutoCommand command, Context context,
+            CancellationToken cancellationToken)
         {
-            var carrier = await context.Carriers.FirstOrDefaultAsync(q => q.Id == command.Auto.CarrierId, cancellationToken);
-            if(carrier == null)
-                throw  new Exception("Такого грузоперевозчика нет");
+            var carrier =
+                await context.Carriers.FirstOrDefaultAsync(q => q.Id == command.Auto.CarrierId, cancellationToken);
+            if (carrier == null)
+                throw new Exception("Такого грузоперевозчика нет");
         }
     }
 }

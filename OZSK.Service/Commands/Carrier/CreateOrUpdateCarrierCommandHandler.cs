@@ -55,6 +55,13 @@ namespace OZSK.Service.Commands.Carrier
 
         private async Task DeleteCarrier(Context context, Model.Carrier entity, CancellationToken cancellationToken)
         {
+            var autos = context.Autos.Where(q => q.CarrierId == entity.Id);
+            foreach (var one in autos)
+            {
+                var driver = context.Drivers.Where(q => q.AutoId == one.Id);
+                context.RemoveRange(driver);
+            }
+            context.RemoveRange(autos);
             context.Carriers.Remove(entity);
             await context.SaveChangesAsync(cancellationToken);
         }
