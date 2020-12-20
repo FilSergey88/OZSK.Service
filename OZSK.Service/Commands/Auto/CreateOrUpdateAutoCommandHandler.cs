@@ -55,7 +55,8 @@ namespace OZSK.Service.Commands.Auto
         {
             var driver = context.Drivers.Where(q => q.AutoId == entity.Id);
             context.RemoveRange(driver);
-            context.Autos.Remove(entity);
+            var auto = await context.Autos.FirstOrDefaultAsync(q => q.Id == entity.Id, cancellationToken);
+            context.Autos.Remove(auto);
             await context.SaveChangesAsync(cancellationToken);
         }
 

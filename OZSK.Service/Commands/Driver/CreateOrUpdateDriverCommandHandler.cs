@@ -54,7 +54,8 @@ namespace OZSK.Service.Commands.Driver
 
         private async Task DeleteDriver(Context context, Model.Driver entity, CancellationToken cancellationToken)
         {
-            context.Drivers.Remove(entity);
+            var driver = await context.Drivers.FirstOrDefaultAsync(q => q.Id == entity.Id, cancellationToken);
+            context.Drivers.Remove(driver);
             await context.SaveChangesAsync(cancellationToken);
         }
 
