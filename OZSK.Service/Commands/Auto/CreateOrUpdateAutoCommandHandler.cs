@@ -74,10 +74,13 @@ namespace OZSK.Service.Commands.Auto
         private async Task Validate(CreateOrUpdateAutoCommand command, Context context,
             CancellationToken cancellationToken)
         {
-            var carrier =
-                await context.Carriers.FirstOrDefaultAsync(q => q.Id == command.Auto.CarrierId, cancellationToken);
-            if (carrier == null)
-                throw new Exception("Такого грузоперевозчика нет");
+            if (command.Auto.EntityState != EntityState.Deleted)
+            {
+                var carrier =
+                    await context.Carriers.FirstOrDefaultAsync(q => q.Id == command.Auto.CarrierId, cancellationToken);
+                if (carrier == null)
+                    throw new Exception("Такого грузоперевозчика нет");
+            }
         }
     }
 }

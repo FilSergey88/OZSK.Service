@@ -71,9 +71,13 @@ namespace OZSK.Service.Commands.Driver
         }
         private async Task Validate(CreateOrUpdateDriverCommand command, Context context, CancellationToken cancellationToken)
         {
-            var carrier = await context.Autos.FirstOrDefaultAsync(q => q.Id == command.Driver.AutoId, cancellationToken);
-            if (carrier == null)
-                throw new Exception("Такого авто нет");
+            if (command.Driver.EntityState != EntityState.Deleted)
+            {
+                var carrier =
+                    await context.Autos.FirstOrDefaultAsync(q => q.Id == command.Driver.AutoId, cancellationToken);
+                if (carrier == null)
+                    throw new Exception("Такого авто нет");
+            }
         }
     }
 }
