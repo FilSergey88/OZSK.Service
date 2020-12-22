@@ -44,7 +44,7 @@ namespace OZSK.Service.Queries
                         EntityState = EntityState.None,
                         Brand = p.Brand,
                         CarrierId = p.CarrierId,
-                        Id = p.CarrierId,
+                        Id = p.Id,
                         Number = p.Number,
                         PTS = p.PTS,
                         STS = p.STS,
